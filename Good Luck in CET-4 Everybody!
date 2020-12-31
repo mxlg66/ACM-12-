@@ -1,0 +1,15 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<algorithm>
+#include<string.h>
+using namespace std; 
+int main()
+{
+    int C, n, M;
+    while (scanf("%d", &n)!=EOF) {
+        if (n % 3 == 0)
+            printf("Cici\n");
+        else printf("Kiki\n");
+    }
+}
