@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<algorithm>
+#include<string.h>
+using namespace std; 
+#define N 1100
+int sg[N], Hash[N];
+int f[17] = { 0,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597 };
+int k = 17;
+void getSG(int n)
+{
+    memset(sg, 0, sizeof(sg));
+    sg[0] = 0; sg[1] = 1;
+    for (int i = 2; i <= N; i++) {
+        for (int j = 0; j <= 20; j++)    Hash[j] = 0;
+
+        for (int j = 1; f[j] <= i; j++) {
+            Hash[sg[i - f[j]]] = 1;
+        }
+        for (int j = 0; j <= 20; j++) {
+            if (!Hash[j]) {
+                sg[i] = j;
+                break;
+            }
+        }
+    }
+}
+
+int main()
+{
+    int i, m, n, p;
+    f[0] = f[1] = 1;
+    for (i = 2; i <= 16; i++)
+        f[i] = f[i - 1] + f[i - 2];
+    getSG(1000);
+    while (scanf("%d%d%d", &m, &n, &p) != EOF)
+    {
+        if (m == 0 && n == 0 && p == 0)
+            break;
+        if ((sg[m] ^ sg[n] ^ sg[p]) == 0)
+            printf("Nacci\n");
+        else
+            printf("Fibo\n");
+    }
+    return 0;
+}
